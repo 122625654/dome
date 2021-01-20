@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <router-view></router-view>
-    </div>
+    </div> 
 </template>
 <style>
     @import "./assets/css/main.css";

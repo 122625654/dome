@@ -18,6 +18,11 @@ export const routers = [
         meta: { title: '自述文件' },
         children:[
             {
+                path: '/map',
+                component: resolve => require(['../components/page/map/Map.vue'], resolve),
+                meta: { title: '地图' }
+            },
+            {
                 path: '/dashboard',
                 component: resolve => require(['../components/page/Dashboard.vue'], resolve),
                 meta: { title: '系统首页' }

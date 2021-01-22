@@ -10,7 +10,7 @@ Vue.use(Router);
 export const routers = [
     {
         path: '/',
-        redirect: '/dashboard'
+        redirect: '/map'
     },
     {
         path: '/',

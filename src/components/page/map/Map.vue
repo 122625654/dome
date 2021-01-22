@@ -40,6 +40,7 @@ export default {
       markers: [],
       windows: [],
       window: "",
+      info: {},
     };
   },
   created() {},
@@ -62,11 +63,12 @@ export default {
           waterLevel: "2.65m", //水位
           waterVelocity: "1.2m/s", //流速
           waterTraffic: "2.8m³/s", //流量
-          imgUrl: require('../../../assets/img/gif.gif')
+          type: 1,
+          imgUrl: require("../../../assets/img/gif.gif"),
         },
-         {
+        {
           lng: 120.704729,
-          lat:31.482841,
+          lat: 31.482841,
           stationName: "青浦水文站3",
           buildTime: "2011-12-08", //建站时间
           stationAddress: "上海市牛头山路东100m", //站址
@@ -77,11 +79,12 @@ export default {
           waterLevel: "2.65m", //水位
           waterVelocity: "1.2m/s", //流速
           waterTraffic: "2.8m³/s", //流量
-          imgUrl: require('../../../assets/img/gif.gif')
+          type: 2,
+          imgUrl: require("../../../assets/img/gif.gif"),
         },
-          {
+        {
           lng: 120.859911,
-          lat:31.421922,
+          lat: 31.421922,
           stationName: "青浦水文站3",
           buildTime: "2011-12-08", //建站时间
           stationAddress: "上海市牛头山路东100m", //站址
@@ -92,7 +95,8 @@ export default {
           waterLevel: "2.65m", //水位
           waterVelocity: "1.2m/s", //流速
           waterTraffic: "2.8m³/s", //流量
-          imgUrl: require('../../../assets/img/dome.png')
+          type: 3,
+          imgUrl: require("../../../assets/img/dome.png"),
         },
         {
           lng: 121.037746,
@@ -107,20 +111,28 @@ export default {
           waterLevel: "2.65m", //水位
           waterVelocity: "1.2m/s", //流速
           waterTraffic: "2.8m³/s", //流量
-          imgUrl: require('../../../assets/img/dome.png')
+          type: 4,
+          imgUrl: require("../../../assets/img/dome.png"),
         },
       ];
       pointMarker.forEach((item, index) => {
         markers.push({
           position: [item.lng, item.lat],
-          icon:item.imgUrl, //不设置默认蓝色水滴
-          style: '',
+          icon: item.imgUrl, //不设置默认蓝色水滴
+          style: "",
           events: {
-            click() {
+            click(ement) {
+              // console.log(ement.lnglat)
+              pointMarker.forEach((data, i) => {
+                if (index === i) {
+                  that.info = data;
+                }
+              });
               that.windows.forEach((window) => {
                 window.visible = false; //关闭窗体
               });
               that.window = that.windows[index];
+
               that.$nextTick(() => {
                 that.window.visible = true; //点击点坐标，出现信息窗体
               });
@@ -194,9 +206,23 @@ export default {
       //生成弹窗
       this.windows = windows;
     },
+
+    /**
+     * 添加点击事件
+     */
+    btn() {
+      document.getElementsByTagName("div")[0].addEventListener("click", (e) => {
+        if (e.target == content) {
+          if (this.info) {
+            console.log(this.info);
+          }
+        }
+      });
+    },
   },
   mounted() {
     this.point();
+    this.btn();
   },
 };
 </script>
@@ -216,7 +242,7 @@ export default {
 }
 
 .amap-page-container >>> .amap-icon img {
-    width: 40px;
-    height: 45px;
+  width: 40px;
+  height: 45px;
 }
 </style>

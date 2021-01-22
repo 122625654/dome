@@ -2,15 +2,6 @@
   <div>
     <el-row>
       <div class="amap-page-container">
-        <!-- <el-amap ref="map" vid="amapDemo"
-                 :zoom="zoom"
-                 :center="center"
-                 :events="events">
-          <el-amap-marker :position="marker.position"
-                          :events="marker.events"
-                          :visible="marker.visible"
-                          :draggable="marker.draggable"></el-amap-marker>
-        </el-amap> -->
         <el-amap
           class="amap-box"
           :zoom="zoom"
@@ -39,6 +30,7 @@
 
 <script>
 import location from "../../../assets/img/dome.png";
+import gif from "../../../assets/img/gif.gif";
 export default {
   data() {
     return {
@@ -70,6 +62,37 @@ export default {
           waterLevel: "2.65m", //水位
           waterVelocity: "1.2m/s", //流速
           waterTraffic: "2.8m³/s", //流量
+          imgUrl: require('../../../assets/img/gif.gif')
+        },
+         {
+          lng: 120.704729,
+          lat:31.482841,
+          stationName: "青浦水文站3",
+          buildTime: "2011-12-08", //建站时间
+          stationAddress: "上海市牛头山路东100m", //站址
+          temperature: "25.5℃", //温度
+          rainfall: "5mm", //雨量
+          windDirection: "西北", //风向
+          windSpend: "2.05m/s", //风速
+          waterLevel: "2.65m", //水位
+          waterVelocity: "1.2m/s", //流速
+          waterTraffic: "2.8m³/s", //流量
+          imgUrl: require('../../../assets/img/gif.gif')
+        },
+          {
+          lng: 120.859911,
+          lat:31.421922,
+          stationName: "青浦水文站3",
+          buildTime: "2011-12-08", //建站时间
+          stationAddress: "上海市牛头山路东100m", //站址
+          temperature: "25.5℃", //温度
+          rainfall: "5mm", //雨量
+          windDirection: "西北", //风向
+          windSpend: "2.05m/s", //风速
+          waterLevel: "2.65m", //水位
+          waterVelocity: "1.2m/s", //流速
+          waterTraffic: "2.8m³/s", //流量
+          imgUrl: require('../../../assets/img/dome.png')
         },
         {
           lng: 121.037746,
@@ -84,12 +107,14 @@ export default {
           waterLevel: "2.65m", //水位
           waterVelocity: "1.2m/s", //流速
           waterTraffic: "2.8m³/s", //流量
+          imgUrl: require('../../../assets/img/dome.png')
         },
       ];
       pointMarker.forEach((item, index) => {
         markers.push({
           position: [item.lng, item.lat],
-          icon: location, //不设置默认蓝色水滴
+          icon:item.imgUrl, //不设置默认蓝色水滴
+          style: '',
           events: {
             click() {
               that.windows.forEach((window) => {
@@ -102,7 +127,6 @@ export default {
             },
           },
         });
-        console.log(item);
         windows.push({
           position: [item.lng, item.lat],
           content:
@@ -189,5 +213,10 @@ export default {
   position: relative;
   top: 65px;
   left: 20px;
+}
+
+.amap-page-container >>> .amap-icon img {
+    width: 40px;
+    height: 45px;
 }
 </style>

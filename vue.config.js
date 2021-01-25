@@ -1,3 +1,5 @@
+const TerserPlugin = require('terser-webpack-plugin') // 打包注释console.log
+
 module.exports = {
     baseUrl: './',
     productionSourceMap: false,
@@ -21,6 +23,17 @@ module.exports = {
             alias: {
                 'vue$': 'vue/dist/vue.esm.js'
             }
+        },
+        optimization: {
+            minimizer: [
+                new TerserPlugin({
+                    terserOptions: {
+                        compress: {
+                            drop_console: true // 清除console
+                        }
+                    }
+                })
+            ]
         }
     }
 }
